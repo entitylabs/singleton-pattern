@@ -23,19 +23,20 @@ public class Simulator {
 		}
 
 		library.addBook(book1);
-		System.out.println(library.hashCode());
-		System.out.println(libraryClone.hashCode());
-		System.out.println(libraryTwo.hashCode());
+		System.out.println("Hashcode of Library object with reference library: "+library.hashCode());
+		System.out.println("Hashcode of Library object with reference libraryClone: "+libraryClone.hashCode());
+		System.out.println("Hashcode of Library object with reference libraryTwo: "+libraryTwo.hashCode());
 		
 		
-		System.out.println(libraryTwo.getBooks().toString());
-		
+		System.out.println("Books in library"+libraryTwo.getBooks().toString());
+		System.out.println("Books in library"+library.getBooks().toString());
 		
 		// Breaking the pattern with reflection
 
 		Library libraryWithReflection = null;
 
 		try {
+			@SuppressWarnings("unchecked")
 			Constructor<Library> constructor = (Constructor<Library>) Library.class.getDeclaredConstructors()[0];
 			constructor.setAccessible(true);
 			libraryWithReflection = constructor.newInstance();
@@ -45,7 +46,8 @@ public class Simulator {
 			e.printStackTrace();
 		}
 		
+		System.out.println("Hashcode of Library object with reference libraryWithReflection: "+libraryWithReflection.hashCode());
 		libraryWithReflection.addBook(book2);
-		System.out.println(libraryWithReflection.getBooks().toString());
+		System.out.println("Books in library"+libraryWithReflection.getBooks().toString());
 	}
 }
